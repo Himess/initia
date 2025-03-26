@@ -193,7 +193,7 @@ func NewInitiaApp(
 	moduleAddrs := make([]sdk.AccAddress, len(maccPerms))
 	for name := range maccPerms {
 		moduleAddrs[i] = authtypes.NewModuleAddress(name)
-		i += 1
+		i++
 	}
 
 	moduleAccountAddresses := app.ModuleAccountAddrs()
@@ -341,6 +341,7 @@ func (app *InitiaApp) SetCheckTx(handler blockchecktx.CheckTx) {
 	app.checkTxHandler = handler
 }
 
+// SetOracleClient sets the oracle client for the application.
 func (app *InitiaApp) SetOracleClient(oracleClient oracleclient.OracleClient) {
 	app.oracleClient = oracleClient
 }
@@ -493,6 +494,7 @@ func (app *InitiaApp) RegisterTendermintService(clientCtx client.Context) {
 	)
 }
 
+// RegisterNodeService registers the node service with the gRPC query router.
 func (app *InitiaApp) RegisterNodeService(clientCtx client.Context, cfg config.Config) {
 	nodeservice.RegisterNodeService(clientCtx, app.GRPCQueryRouter(), cfg)
 }
@@ -593,6 +595,7 @@ func (app *InitiaApp) Close() error {
 	return nil
 }
 
+// StartOracleClient starts the oracle client if it's initialized.
 func (app *InitiaApp) StartOracleClient(ctx context.Context) error {
 	if app.oracleClient != nil {
 		return app.oracleClient.Start(ctx)

@@ -8,6 +8,8 @@ import (
 	dbm "github.com/cosmos/cosmos-db"
 )
 
+// VMStore provides a Cosmos SDK-compatible key-value store interface
+// for accessing and modifying data within the EVM module context.
 type VMStore struct {
 	ctx   context.Context
 	store collections.Map[[]byte, []byte]

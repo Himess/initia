@@ -92,6 +92,8 @@ func (genState GenesisState) ConfigureBondDenom(cdc codec.JSONCodec, bondDenom s
 	return genState
 }
 
+// AddMarketData adds market data and currency pair information to the genesis state.
+// It initializes the oracle and marketmap modules using a predefined market file.
 func (genState GenesisState) AddMarketData(cdc codec.JSONCodec, ac address.Codec) GenesisState {
 	var oracleGenState oracletypes.GenesisState
 	cdc.MustUnmarshalJSON(genState[oracletypes.ModuleName], &oracleGenState)
@@ -140,6 +142,8 @@ func (genState GenesisState) AddMarketData(cdc codec.JSONCodec, ac address.Codec
 	return genState
 }
 
+// ConfigureICA configures the Interchain Accounts (ICA) module in the genesis state,
+// enabling both controller and host submodules with default allowed messages.
 func (genState GenesisState) ConfigureICA(cdc codec.JSONCodec) GenesisState {
 	// create ICS27 Controller submodule params
 	controllerParams := icacontrollertypes.Params{
